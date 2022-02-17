@@ -7,17 +7,21 @@ const btnEnviar  = document.querySelector( '#btnEnviar' );
 const socket = io();
 
 socket.on( 'connect', () => {
-    console.log( 'Conectado al servidor' );
+    // console.log( 'Conectado al servidor' );
 
     lblOffline.style.display = 'none';
     lblOnline.style.display  = '';
 });
 
 socket.on( 'disconnect', () => {
-    console.log( 'Desconectado del servidor' );
+    // console.log( 'Desconectado del servidor' );
 
     lblOnline.style.display  = 'none';
     lblOffline.style.display = '';
+});
+
+socket.on( 'enviar-mensaje', ( payload ) => {
+    console.log( payload );
 });
 
 btnEnviar.addEventListener( 'click', () => {
@@ -27,6 +31,7 @@ btnEnviar.addEventListener( 'click', () => {
         id: '213213124',
         fecha: new Date().getTime()
     }
-    
+
+    // *  Emite un evento hacia el servidor.
     socket.emit( 'enviar-mensaje', payload );
 });

@@ -40,7 +40,8 @@ class Server {
             });
 
             socket.on( 'enviar-mensaje', ( payload ) => {
-                console.log( payload );
+                // * Emite una evento para los clientes
+                this.io.emit( 'enviar-mensaje', payload );
             });
         });
     }
