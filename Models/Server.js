@@ -39,9 +39,13 @@ class Server {
                 console.log( 'Cliente desconectado', socket.id );
             });
 
-            socket.on( 'enviar-mensaje', ( payload ) => {
+            socket.on( 'enviar-mensaje', ( payload, callback ) => {
+                const id = 12345;
+
                 // * Emite una evento para los clientes
                 this.io.emit( 'enviar-mensaje', payload );
+
+                callback({ id, fecha: new Date().getTime() });
             });
         });
     }
